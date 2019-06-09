@@ -45,12 +45,13 @@ static const struct option options[] =
     { "trcidr12", 1, 0, '2' },
     { "trcidr13", 1, 0, '3' },
     { "decode-etmv4", 0, 0, 'e' },
+	{ "raw-stream", 0, 0, 'r' },
     { "debuglog", 0, 0, 'd' },
     { "help", 0, 0, 'h' },
     { NULL, 0, 0, 0   },
 };
 
-static const char *optstring = "i:c:Cp0:8:9:2:3:edh";
+static const char *optstring = "i:c:Cp0:8:9:2:3:erdh";
 
 void usage(void)
 {
@@ -58,6 +59,7 @@ void usage(void)
     printf("Options:\n");
     printf("  -i|--input <trace file>                 Give the trace file\n\n");
     printf("  -p|--decode-ptm (default option)        Decode PTM trace\n");
+    printf("  -r|--raw-stream                         Decode trace streams without ETB formatting for PTM trace only\n");
     printf("  -c|--context <context ID size>          Give the size of ContextID for PTM trace only\n");
     printf("  -C|--cycle-accurate                     Enable Cycle-Accurate for PTM trace only\n\n");
     printf("  -e|--decode-etmv4                       Decode ETMv4 trace\n");
@@ -158,6 +160,11 @@ int main(int argc, char **argv)
                 return EXIT_FAILURE;
             }
             break;
+
+        case 'r':
+            IS_RAW(&(stream.tracer)) = 1;
+            break;
+
 
         case '0':
             val = strtol(optarg, &endptr, 0);

@@ -68,7 +68,7 @@ DECL_DECODE_FN(isync)
     for (i = 0, index = 1; i < 4; i++, index++) {
         addr |= (unsigned int)(pkt[index]) << (8 * i);
     }
-
+    LOGD("addr = 0x%x\n", addr);
     info = pkt[index++];
     reason = (info & 0x60) >> 5;
 

@@ -28,9 +28,11 @@ struct ptm_tracer
     int inst_state;
     int cycle_accurate;
     int contextid_size;
+    int raw;
 };
 
 #define IS_CYC_ACC(t) (((struct ptm_tracer *)(t))->cycle_accurate)
+#define IS_RAW(t) (((struct ptm_tracer *)(t))->raw)
 #define CONTEXTID_SIZE(t) (((struct ptm_tracer *)(t))->contextid_size)
 
 extern void tracer_sync(void *t, unsigned int addr,   \
